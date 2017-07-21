@@ -43,6 +43,22 @@ public class ParagraphProducer {
 	}
 	
 	public synchronized WorkPiece getWork() throws IOException{
+		String next = line();
+		
+		while(next!=null && next.trim().isEmpty()){
+			next = line();
+		}
+		
+		if(next==null){
+			return null;
+		}
+		
+		final WorkPiece work = new WorkPiece(paragraphSeq.getAndIncrement(), next);
+		
+		return work;
+	}
+
+	private String line() throws IOException {
 		if(splittedBuf.isEmpty()){
 			final String line = br.readLine();
 			if(line==null){
@@ -52,12 +68,10 @@ public class ParagraphProducer {
 			splittedBuf = new ArrayList<String>(Arrays.asList(splitLineIfNeeded));
 		}
 		final Iterator<String> iterator = splittedBuf.iterator();
+		
 		final String next = iterator.next();
 		iterator.remove();
-		
-		final WorkPiece work = new WorkPiece(paragraphSeq.getAndIncrement(), next);
-		
-		return work;
+		return next;
 	}
 	
 	protected String[] splitLineIfNeeded(String line){
