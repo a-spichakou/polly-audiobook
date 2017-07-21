@@ -11,6 +11,8 @@ import java.nio.file.Path;
 
 public class PollyTestData {
 
+	public static final int TEST_LINES_COUNT_10 = 10;
+
 	private static volatile PollyTestData instance;
 
 	private final String LINE = "line";
@@ -35,10 +37,22 @@ public class PollyTestData {
 		}
 
 		try {
-			for (int i = 0; i < 10; i++) {
+			int i = 0;
+			for (; i < TEST_LINES_COUNT_10; i++) {
 				bufferedWriter.write(LINE + i);
 				bufferedWriter.newLine();
 			}
+			// Line has to bi splitted
+			
+			final StringBuffer buf = new StringBuffer();
+			for(int k=0;k<ParagraphProducer.MAX_LINE_LENGTH_1000/2+1;k++){
+				buf.append("a"+i+".");
+				i++;
+			}
+			
+			bufferedWriter.write(buf.toString());
+			bufferedWriter.newLine();
+			
 			bufferedWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

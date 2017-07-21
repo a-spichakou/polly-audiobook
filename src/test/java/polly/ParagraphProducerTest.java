@@ -30,13 +30,51 @@ public class ParagraphProducerTest extends AbstractTest{
 			fail(e1.getLocalizedMessage());
 		}
 		WorkPiece work = null;
-		try {
-			work = instance.getWork();
-		} catch (IOException e) {
-			fail(e.getLocalizedMessage());
+		
+		for(int i=0;i<PollyTestData.TEST_LINES_COUNT_10;i++){
+			try {
+				work = instance.getWork();
+				assertNotNull(work);
+				assertEquals(LINE+work.getParagraphSeqIdx(),work.getParagraph());	
+			} catch (IOException e) {
+				fail(e.getLocalizedMessage());
+			}
 		}
 		
-		assertNotNull(work);
-		assertEquals(LINE+work.getParagraphSeqIdx(),work.getParagraph());
+		for (int i = 0; i < ParagraphProducer.MAX_LINE_LENGTH_1000 / 2 + 1; i++) {
+			try {
+				work = instance.getWork();
+				assertNotNull(work);
+				assertEquals("a" + work.getParagraphSeqIdx(), work.getParagraph());
+
+			} catch (IOException e) {
+				fail(e.getLocalizedMessage());
+			}
+		}
+	}
+	
+	@Test
+	public void splitLineTest(){
+		ParagraphProducer instance = null;
+		try {
+			instance = ParagraphProducer.getInstance();
+		} catch (FileNotFoundException e1) {
+			fail(e1.getLocalizedMessage());
+		}
+		
+		assertNotNull(instance.splitLineIfNeeded(null));
+		
+		assertEquals("line", instance.splitLineIfNeeded("line")[0]);
+		assertEquals(1, instance.splitLineIfNeeded("line").length);
+		assertEquals("li.ne", instance.splitLineIfNeeded("li.ne")[0]);
+		
+		final StringBuffer buf = new StringBuffer();
+		for(int i=0;i<ParagraphProducer.MAX_LINE_LENGTH_1000/2+1;i++){
+			buf.append("a.");
+		}
+		
+		final String[] splitLineIfNeeded = instance.splitLineIfNeeded(buf.toString());
+		
+		assertEquals(ParagraphProducer.MAX_LINE_LENGTH_1000/2+1, splitLineIfNeeded.length);
 	}
 }
