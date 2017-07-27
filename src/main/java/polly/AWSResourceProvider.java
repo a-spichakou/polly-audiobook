@@ -1,5 +1,7 @@
 package polly;
 
+import java.util.List;
+
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
@@ -14,6 +16,7 @@ public class AWSResourceProvider {
 	
 	private final AmazonPollyClient pll;
 	private final Voice voice;
+	private final Voice voiceDirectSpeech;
 	
 	private AWSResourceProvider(){
 		// create an Amazon Polly client in a specific region
@@ -27,7 +30,9 @@ public class AWSResourceProvider {
 		// Synchronously ask Amazon Polly to describe available TTS voices.
 		final DescribeVoicesResult describeVoicesResult = pll
 				.describeVoices(describeVoicesRequest);
-		voice = describeVoicesResult.getVoices().get(5);
+		final List<Voice> voices = describeVoicesResult.getVoices();
+		voice = voices.get(5);
+		voiceDirectSpeech = voices.get(5);
 	}
 
 	public static AWSResourceProvider getInstance(){
@@ -47,6 +52,10 @@ public class AWSResourceProvider {
 
 	public Voice getVoice() {
 		return voice;
+	}
+
+	public Voice getVoiceDirectSpeech() {
+		return voiceDirectSpeech;
 	}
 
 	public AmazonPollyClient getPll() {

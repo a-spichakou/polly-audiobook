@@ -8,8 +8,9 @@ public class Worker implements Callable<String>{
 	@Override
 	public String call() {
 		final ParagraphConsumer consumer = new ParagraphConsumer();
+		WorkPiece work = null;
 		try {
-			for(WorkPiece work = null; (work = ParagraphProducer.getInstance().getWork()) !=null;){
+			for(; (work = ParagraphProducer.getInstance().getWork()) !=null;){
 					consumer.doWork(work);	
 			}
 		} catch (IOException e) {

@@ -14,6 +14,7 @@ public class Polly {
 				(validateOutputParam!=null && !validateOutputParam.isEmpty())){
 			System.out.println(validateBookParam);
 			System.out.println(validateOutputParam);
+			return;
 		}
 		
 		try {
