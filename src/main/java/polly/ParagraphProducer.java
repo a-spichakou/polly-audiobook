@@ -42,7 +42,7 @@ public class ParagraphProducer {
 		return producer;
 	}
 	
-	public synchronized WorkPiece getWork() throws IOException{
+	public synchronized IWorkPiece getWork() throws IOException{
 		String next = line();
 		
 		while(next!=null && next.trim().isEmpty()){
@@ -52,9 +52,13 @@ public class ParagraphProducer {
 		if(next==null){
 			return null;
 		}
+		IWorkPiece work;
 		
-		final WorkPiece work = new WorkPiece(paragraphSeq.getAndIncrement(), next);
-		
+		if(Config.getInstance().isPlain()){
+			work = new PlainWorkPiece(paragraphSeq.getAndIncrement(), next);
+		} else {
+			work = new RoledWorkPiece(paragraphSeq.getAndIncrement(), next);
+		}
 		return work;
 	}
 

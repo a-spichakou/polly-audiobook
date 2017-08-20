@@ -29,7 +29,7 @@ public class ParagraphProducerTest extends AbstractTest{
 		} catch (FileNotFoundException e1) {
 			fail(e1.getLocalizedMessage());
 		}
-		WorkPiece work = null;
+		IWorkPiece work = null;
 		
 		for(int i=0;i<PollyTestData.TEST_LINES_COUNT_10;i++){
 			try {

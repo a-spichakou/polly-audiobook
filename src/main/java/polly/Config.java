@@ -10,6 +10,7 @@ public class Config {
 	
 	private String bookPath;
 	private String outputFolder;
+	private boolean isPlain = false;
 	
 	private Config(){}
 	
@@ -23,7 +24,7 @@ public class Config {
 					localInstance = new Config();
 					localInstance.bookPath = System.getProperty(BOOK_PATH);
 					localInstance.outputFolder = System.getProperty(OUTPUT_FOLDER);
-					
+
 					instance = localInstance;
 				}
 			}
@@ -37,5 +38,9 @@ public class Config {
 
 	public String getOutputFolder() {
 		return outputFolder;
+	}
+
+	public boolean isPlain() {
+		return isPlain;
 	}
 }
