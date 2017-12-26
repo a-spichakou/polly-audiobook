@@ -31,8 +31,8 @@ public class AWSResourceProvider {
 		final DescribeVoicesResult describeVoicesResult = pll
 				.describeVoices(describeVoicesRequest);
 		final List<Voice> voices = describeVoicesResult.getVoices();
-		voice = voices.get(4);
-		voiceDirectSpeech = voices.get(5);
+		voice = voices.get(6);
+		voiceDirectSpeech = voices.get(7);
 	}
 
 	public static AWSResourceProvider getInstance(){

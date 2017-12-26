@@ -6,9 +6,9 @@ import java.util.List;
 
 public class RoledWorkPiece extends AbstractWorkPiece{
 
-	protected static final String MINUSES[] = new String[] {"—", "-"};
+	protected static final String MINUSES[] = new String[] {"—", "-", "–"};
 	protected static final String SPACES[] = new String[] {" ", " "};
-	protected static final String ENDINGS[] = new String[] {"\\.",",","\\?", "!"};
+	protected static final String ENDINGS[] = new String[] {"\\.",",","\\?", "!", "…"};
 	
 	protected static List<String> endings = new ArrayList<String>();
 	protected static List<String> startings = new ArrayList<String>();
