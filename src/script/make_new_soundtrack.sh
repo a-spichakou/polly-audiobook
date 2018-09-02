@@ -1,0 +1,1 @@
+ffmpeg -f concat -safe 0 -i <(for f in ../../sounds/*; do echo "file '$PWD/$f'"; done) -c copy track.mp3;

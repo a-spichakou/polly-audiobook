@@ -8,6 +8,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.polly.AmazonPollyClient;
 import com.amazonaws.services.polly.model.DescribeVoicesRequest;
 import com.amazonaws.services.polly.model.DescribeVoicesResult;
+import com.amazonaws.services.polly.model.LanguageCode;
 import com.amazonaws.services.polly.model.Voice;
 
 public class AWSResourceProvider {
@@ -25,14 +26,14 @@ public class AWSResourceProvider {
 				new ClientConfiguration());
 		pll.setRegion(com.amazonaws.regions.Region.getRegion(Regions.US_EAST_1));
 		// Create describe voices request.
-		final DescribeVoicesRequest describeVoicesRequest = new DescribeVoicesRequest();
+		final DescribeVoicesRequest describeVoicesRequest = new DescribeVoicesRequest().withLanguageCode(LanguageCode.RuRU);
 
 		// Synchronously ask Amazon Polly to describe available TTS voices.
 		final DescribeVoicesResult describeVoicesResult = pll
 				.describeVoices(describeVoicesRequest);
 		final List<Voice> voices = describeVoicesResult.getVoices();
-		voice = voices.get(6);
-		voiceDirectSpeech = voices.get(7);
+		voice = voices.get(0);
+		voiceDirectSpeech = voices.get(1);
 	}
 
 	public static AWSResourceProvider getInstance(){
