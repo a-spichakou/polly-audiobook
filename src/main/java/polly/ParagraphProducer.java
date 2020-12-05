@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,12 +24,12 @@ public class ParagraphProducer {
 	
 	private List<String> splittedBuf = new ArrayList<String>();
 	
-	private ParagraphProducer() throws FileNotFoundException{
-		br = new BufferedReader(new FileReader(Config.getInstance().getBookPath()));
+	private ParagraphProducer() throws IOException {
+		br = new BufferedReader(new FileReader(Config.getInstance().getBookPath(), StandardCharsets.UTF_8));
 		paragraphSeq = new AtomicInteger(0);
 	}
 	
-	public static ParagraphProducer getInstance() throws FileNotFoundException{
+	public static ParagraphProducer getInstance() throws IOException {
 		ParagraphProducer localParagraphProducer = producer;
 		if(localParagraphProducer==null){
 			synchronized (ParagraphProducer.class) {

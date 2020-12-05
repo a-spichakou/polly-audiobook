@@ -7,13 +7,13 @@ public class Worker implements Callable<String>{
 
 	@Override
 	public String call() {
-		final ParagraphConsumer consumer = new ParagraphConsumer();
+		final IParagraphConsumer consumer = new SOVAParagraphConsumer();
 		IWorkPiece work = null;
 		try {
 			for(; (work = ParagraphProducer.getInstance().getWork()) !=null;){
 					consumer.doWork(work);	
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return e.getMessage();
 		} 

@@ -16,13 +16,13 @@ public class ParagraphProducerTest extends AbstractTest{
 	public void getInstanceTest(){
 		try {
 			assertNotNull(ParagraphProducer.getInstance());
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			fail(e.getLocalizedMessage());
 		}
 	}
 
 	@Test
-	public void getWorkTest(){
+	public void getWorkTest() throws IOException {
 		ParagraphProducer instance = null;
 		try {
 			instance = ParagraphProducer.getInstance();
@@ -58,7 +58,7 @@ public class ParagraphProducerTest extends AbstractTest{
 		ParagraphProducer instance = null;
 		try {
 			instance = ParagraphProducer.getInstance();
-		} catch (FileNotFoundException e1) {
+		} catch (Exception e1) {
 			fail(e1.getLocalizedMessage());
 		}
 		

@@ -33,7 +33,7 @@ public class Processor {
 			InterruptedException, ExecutionException {
 		
 		final ExecutorService workStealingPool = Executors.newWorkStealingPool();
-		final List<Worker> produce = WorkersFactory.getInstance().produce(10);
+		final List<Worker> produce = WorkersFactory.getInstance().produce(3);
 		final List<Future<String>> invokeAll = workStealingPool.invokeAll(produce);
 		for (Future<String> task : invokeAll) {
 			task.get();
