@@ -29,7 +29,7 @@ public class Config {
                     localInstance = new Config();
                     localInstance.bookPath = System.getProperty(BOOK_PATH);
                     localInstance.outputFolder = System.getProperty(OUTPUT_FOLDER);
-                    localInstance.sovaURL = System.getProperty(SOVA_URL) != null ? System.getProperty(SOVA_URL) : "http://192.168.1.123:8899/synthesize/";
+                    localInstance.sovaURL = System.getProperty(SOVA_URL) != null ? System.getProperty(SOVA_URL) : "http://localhost:8899/synthesize/";
 
                     instance = localInstance;
                 }
