@@ -26,6 +26,10 @@ public class SOVAParagraphConsumer implements IParagraphConsumer {
 
     @Override
     public void doWork(IWorkPiece work) throws FileNotFoundException, IOException, InterruptedException {
+        final String outputFile = getOutputFile(work);
+        if (new File(outputFile).canRead()) {
+            return;
+        }
         Map<Object, Object> data = new HashMap<>();
         data.put("voice", "Natasha");
         data.put("text", work.getParagraph());
@@ -43,7 +47,6 @@ public class SOVAParagraphConsumer implements IParagraphConsumer {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         InputStream inputStream = SOVAResponseConverter.extractWave(response.body());
-        final String outputFile = getOutputFile(work);
         IOUtils.copy(inputStream, new FileOutputStream(new File(outputFile)));
     }
 
