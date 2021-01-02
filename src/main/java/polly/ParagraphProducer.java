@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -83,8 +84,10 @@ public class ParagraphProducer {
                 return null;
             }
 
-            int curentLine = processingLine.getAndIncrement();
-            logger.info("Processing line {} of {}", curentLine, linesTotal);
+            float curentLine = processingLine.getAndIncrement();
+            DecimalFormat df = new DecimalFormat("###.##");
+
+            logger.info("Processing line {} of {}, {}% ", curentLine, linesTotal, df.format((curentLine/linesTotal)*100));
 
             final String[] splitLineIfNeeded = splitLineIfNeeded(line);
             splittedBuf = new ArrayList<>(Arrays.asList(splitLineIfNeeded));
