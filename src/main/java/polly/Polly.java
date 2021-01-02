@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
+import org.apache.log4j.PropertyConfigurator;
 
 public class Polly {
 
     public static void main(String[] args) {
+        PropertyConfigurator.configure(Polly.class.getClassLoader().getResource("log4.properties"));
+
         final Logger logger = LoggerFactory.getLogger(Polly.class);
 
         final String validateBookParam = validateBookParam();
