@@ -6,19 +6,19 @@ import java.util.List;
 
 public class RoledWorkPiece extends AbstractWorkPiece{
 
-	protected static final String MINUSES[] = new String[] {"—", "-", "–"};
-	protected static final String SPACES[] = new String[] {" ", " "};
-	protected static final String ENDINGS[] = new String[] {"\\.",",","\\?", "!", "…"};
+	protected static final String[] MINUSES = new String[] {"—", "-", "–"};
+	protected static final String[] SPACES = new String[] {" ", " "};
+	protected static final String[] ENDINGS = new String[] {"\\.",",","\\?", "!", "…"};
 	
-	protected static List<String> endings = new ArrayList<String>();
-	protected static List<String> startings = new ArrayList<String>();
+	protected static List<String> ends = new ArrayList<>();
+	protected static List<String> startings = new ArrayList<>();
 	
 	static{
 		for(String ending: ENDINGS){
 			for(String space: SPACES){
 				for(String minus: MINUSES){
 					String speachEnding = ending+space+minus;
-					endings.add(speachEnding);
+					ends.add(speachEnding);
 				}
 			}
 		}
@@ -41,7 +41,7 @@ public class RoledWorkPiece extends AbstractWorkPiece{
 	
 	protected String[] splitDirectSpeech(String line) {
 		String[] split = new String[] { line };
-		for (String ending : endings) {
+		for (String ending : ends) {
 			split = line.split(ending);
 			if (split.length > 1) {
 				return split;

@@ -2,9 +2,9 @@ package polly;
 
 public interface IWorkPiece {
 
-	public SpeechSentence[] format();
+    SpeechSentence[] format();
 
-	public int getParagraphSeqIdx();
+    int getParagraphSeqIdx();
 
-	public Object getParagraph();
+    Object getParagraph();
 }

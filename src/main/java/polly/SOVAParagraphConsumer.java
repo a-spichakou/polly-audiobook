@@ -18,14 +18,13 @@ import java.util.Map;
  * SOVA TTS consumer
  *
  * @author aspichakou
- * @since
  */
 public class SOVAParagraphConsumer implements IParagraphConsumer {
 
-    private static final String TTS_04D_WAVE = "tts%04d.wav";
+    private static final String TTS_04D_WAVE = "%s" + File.separator + "tts%04d.wav";
 
     @Override
-    public void doWork(IWorkPiece work) throws FileNotFoundException, IOException, InterruptedException {
+    public void doWork(IWorkPiece work) throws IOException, InterruptedException {
         final String outputFile = getOutputFile(work);
         if (new File(outputFile).canRead()) {
             return;
@@ -51,10 +50,9 @@ public class SOVAParagraphConsumer implements IParagraphConsumer {
     }
 
     public String getOutputFile(IWorkPiece work) {
-        final String format = String.format(Config.getInstance()
-                        .getOutputFolder() + File.separator + TTS_04D_WAVE,
-                work.getParagraphSeqIdx());
-        return format;
+        return String.format(TTS_04D_WAVE,
+                Config.getInstance()
+                        .getOutputFolder(), work.getParagraphSeqIdx());
     }
 
     public static HttpRequest.BodyPublisher oMultipartData(Map<Object, Object> data,

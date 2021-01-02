@@ -10,9 +10,12 @@ import java.util.Base64;
  * Extracting WAVE from JSON
  *
  * @author aspichakou
- * @since
  */
 public class SOVAResponseConverter {
+
+    private SOVAResponseConverter() {
+
+    }
 
     public static InputStream extractWave(String jsonResponse) {
         String base64Wave = JsonPath.read(jsonResponse, "$.response[0].response_audio");
