@@ -1,5 +1,7 @@
 package polly;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Config {
 
     public static final String OUTPUT_FOLDER = "outputFolder";
@@ -13,8 +15,7 @@ public class Config {
     private String bookPath;
     private String outputFolder;
     private boolean isPlain = false;
-    private String sovaURL;
-
+    public String[] urls;
 
     private Config() {
     }
@@ -29,7 +30,13 @@ public class Config {
                     localInstance = new Config();
                     localInstance.bookPath = System.getProperty(BOOK_PATH);
                     localInstance.outputFolder = System.getProperty(OUTPUT_FOLDER);
-                    localInstance.sovaURL = System.getProperty(SOVA_URL) != null ? System.getProperty(SOVA_URL) : "http://localhost:8899/synthesize/";
+
+                    String property = System.getProperty(SOVA_URL);
+                    if (property == null) {
+                        localInstance.urls = new String[]{"http://localhost:8899/synthesize/"};
+                    } else {
+                        localInstance.urls = property.split(";");
+                    }
 
                     instance = localInstance;
                 }
@@ -51,6 +58,7 @@ public class Config {
     }
 
     public String getSovaURL() {
-        return sovaURL;
+        int randomNum = ThreadLocalRandom.current().nextInt(0, urls.length);
+        return urls[randomNum];
     }
 }

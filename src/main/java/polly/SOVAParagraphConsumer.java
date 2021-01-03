@@ -1,6 +1,8 @@
 package polly;
 
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URI;
@@ -21,6 +23,8 @@ import java.util.Map;
  */
 public class SOVAParagraphConsumer implements IParagraphConsumer {
 
+    final Logger logger = LoggerFactory.getLogger(SOVAParagraphConsumer.class);
+
     private static final String TTS_04D_WAVE = "%s" + File.separator + "tts%04d.wav";
 
     @Override
@@ -36,13 +40,15 @@ public class SOVAParagraphConsumer implements IParagraphConsumer {
         String boundary = "-------------oiawn4tp89n4e9p5";
 
         HttpClient client = HttpClient.newHttpClient();
+        String sovaURL = Config.getInstance().getSovaURL();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(Config.getInstance().getSovaURL()))
+                .uri(URI.create(sovaURL))
                 .headers("Content-Type",
                         "multipart/form-data; boundary=" + boundary)
                 .POST(oMultipartData(data, boundary))
                 .build();
 
+        logger.info("Sending request to {}", sovaURL);
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         InputStream inputStream = SOVAResponseConverter.extractWave(response.body());
