@@ -30,7 +30,7 @@ public class Processor {
 
     public synchronized void process() throws InterruptedException, ExecutionException {
         final ExecutorService workStealingPool = Executors.newWorkStealingPool();
-        final List<Worker> produce = WorkersFactory.getInstance().produce(4);
+        final List<Worker> produce = WorkersFactory.getInstance().produce(6);
         final List<Future<String>> invokeAll = workStealingPool.invokeAll(produce);
         for (Future<String> task : invokeAll) {
             task.get();
