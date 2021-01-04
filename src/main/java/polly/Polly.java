@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.concurrent.ExecutionException;
 import org.apache.log4j.PropertyConfigurator;
 
 public class Polly {
@@ -24,7 +23,7 @@ public class Polly {
 
         try {
             Processor.getInstance().process();
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException e) {
             logger.error("Execution fail: ", e);
             Thread.currentThread().interrupt();
         }
