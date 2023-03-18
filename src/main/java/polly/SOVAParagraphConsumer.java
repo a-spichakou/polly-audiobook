@@ -35,7 +35,7 @@ public class SOVAParagraphConsumer implements IParagraphConsumer {
             return;
         }
         Map<Object, Object> data = new HashMap<>();
-        data.put("voice", "Ruslan");
+        data.put("voice", "xenia");
         data.put("pitch", "1.0");
         data.put("rate", "1.0");
         data.put("volume", "0.0");
